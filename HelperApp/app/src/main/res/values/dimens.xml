@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- HomeActivity dimens -->
+
+    <dimen name="home_activity_top_margin">16dp</dimen>
+    <dimen name="home_activity_left_right_margin_list_item">20dp</dimen>
+    <dimen name="home_activity_top_bottom_margin_list_item">4dp</dimen>
+    <dimen name="home_activity_text_left_margin_list_item">10dp</dimen>
+    <dimen name="home_activity_left_right_margin_edit_text">20dp</dimen>
+
+</resources>

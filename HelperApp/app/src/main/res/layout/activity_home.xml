@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity"
+    android:background="@color/white">
+
+    <!-- To stop EitText from being focused in onCreate -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:id="@+id/dummyView"/>
+    <!-- To stop EitText from being focused in onCreate -->
+
+    <EditText
+        android:id="@+id/app_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/black"
+        android:hint="@string/home_activity_search_hint"
+        android:textColorHighlight="@color/light_grey"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/home_activity_top_margin"
+        android:layout_marginRight="@dimen/home_activity_left_right_margin_edit_text"
+        android:layout_marginLeft="@dimen/home_activity_left_right_margin_edit_text"/>
+
+    <com.app.helper.vladburca.helperapp.view.HotFixRecycleView
+        android:id="@+id/app_list"
+        android:scrollbars="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/app_search"/>
+
+</RelativeLayout>

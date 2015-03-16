@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HelperApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- HomeActivity strings -->
+    <string name="home_activity_app_name_placeholder">NamePlaceholder</string>
+    <string name="home_activity_app_priority_placeholder">PriorityPlaceholder</string>
+    <string name="home_activity_search_hint">Search for a app...</string>
+
+</resources>

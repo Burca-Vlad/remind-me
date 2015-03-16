@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_launcher"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="@dimen/home_activity_top_bottom_margin_list_item"
+        android:layout_marginTop="@dimen/home_activity_top_bottom_margin_list_item"
+        android:layout_marginLeft="@dimen/home_activity_left_right_margin_list_item"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/app_icon"
+        android:layout_marginLeft="@dimen/home_activity_text_left_margin_list_item"
+        android:layout_marginRight="@dimen/home_activity_left_right_margin_list_item"
+        android:layout_alignTop="@+id/app_icon"
+        android:layout_alignBottom="@+id/app_icon"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="New Text"
+            android:layout_weight="0.5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/app_priority"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="New Text"
+            android:layout_weight="0.5"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/list_separator"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:background="@color/light_grey"
+        android:layout_height="2dp"
+        android:layout_marginLeft="@dimen/home_activity_left_right_margin_list_item"
+        android:layout_marginRight="@dimen/home_activity_left_right_margin_list_item"
+        android:layout_below="@+id/app_icon">
+
+    </LinearLayout>
+</RelativeLayout>
