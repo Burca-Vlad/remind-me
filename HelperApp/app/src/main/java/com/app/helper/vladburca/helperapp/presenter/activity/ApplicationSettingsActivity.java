@@ -5,58 +5,44 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.app.helper.vladburca.helperapp.R;
-import com.app.helper.vladburca.helperapp.controller.SettingsActivityController;
+import com.app.helper.vladburca.helperapp.controller.ApplicationSettingsActivityController;
 
 public class ApplicationSettingsActivity extends Activity {
 
-    private static String TAG = "ApplicationSettingsActivity";
+    private final String TAG = "ApplicationSettingsActivity";
+    private static final String appNameKey = "appNameKey";
 
-    private SettingsActivityController settingsActivityController;
+    private String appName;
+    private ApplicationSettingsActivityController applicationSettingsActivityController;
 
-    private Switch persistentNotificationSwitch;
-    private Switch complexNotificationSwitch;
-    private Button resetButton;
+    private ImageView appIcon;
+    private Switch appMonitor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_settings);
 
+        this.appName = getIntent().getStringExtra(appNameKey);
+        getActionBar().setTitle(appName + " " + getString(R.string.application_settings_title_suffix));
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-        this.settingsActivityController = SettingsActivityController.getInstance(this);
-        this.persistentNotificationSwitch = (Switch) findViewById(R.id.switch_persistent);
-        this.complexNotificationSwitch = (Switch) findViewById(R.id.switch_complex);
-        this.resetButton = (Button) findViewById(R.id.button_reset);
+        this.applicationSettingsActivityController = new ApplicationSettingsActivityController(this, appName);
+        this.appIcon = (ImageView) findViewById(R.id.app_icon_large);
+        this.appMonitor = (Switch) findViewById(R.id.switch_monitor);
 
-        this.settingsActivityController.preloadUserValues(complexNotificationSwitch, persistentNotificationSwitch);
-        this.persistentNotificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        applicationSettingsActivityController.preloadData(appIcon, appMonitor);
+
+        this.appMonitor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Log.i(TAG, "Value: " + b);
-                settingsActivityController.setShowPersistentNotification(b);
-            }
-        });
-
-        this.complexNotificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                settingsActivityController.setShowComplexNotification(b);
-            }
-        });
-
-        this.resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                settingsActivityController.resetNotificationsBehaviour();
-                settingsActivityController.preloadUserValues(complexNotificationSwitch, persistentNotificationSwitch);
+                applicationSettingsActivityController.updateAppMonitorisation(b);
             }
         });
     }
@@ -91,5 +77,4 @@ public class ApplicationSettingsActivity extends Activity {
         super.onBackPressed();
         finish();
     }
-
 }

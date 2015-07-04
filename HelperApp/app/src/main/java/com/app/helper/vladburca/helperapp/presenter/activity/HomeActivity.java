@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -17,7 +18,6 @@ import com.app.helper.vladburca.helperapp.presenter.adapter.HomeActivityAdapter;
 import com.app.helper.vladburca.helperapp.view.HotFixRecycleView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class HomeActivity extends Activity {
@@ -43,9 +43,9 @@ public class HomeActivity extends Activity {
 
         homeActivityController = HomeActivityController.getInstance(this);
         homeActivityController.getApplicationsList();
-        setListOfApps();
 
         items = homeActivityController.getApps();
+        setListOfApps();
         this.appsSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -92,14 +92,25 @@ public class HomeActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, ApplicationSettingsActivity.class);
+            Intent intent = new Intent(this, GeneralSettingsActivity.class);
             startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "resuming");
+        items.clear();
+        items = homeActivityController.getApplicationsList();
+        appListAdapter.setItems(items);
+        appListAdapter.notifyDataSetChanged();
+    }
+
     private void setListOfApps(){
-        this.appListAdapter = new HomeActivityAdapter(this, homeActivityController.getApplicationsList());
+        this.appListAdapter = new HomeActivityAdapter(this, items);
         HotFixRecycleView.LayoutManager pinListLayoutManager = new LinearLayoutManager(this);
         this.appList.setLayoutManager(pinListLayoutManager);
         this.appList.setAdapter(appListAdapter);

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.helper.vladburca.helperapp" >
 
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/remind_me_icon"
@@ -10,12 +12,18 @@
         <activity
             android:name=".presenter.activity.HomeActivity"
             android:icon="@drawable/remind_me_icon"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".presenter.activity.GeneralSettingsActivity"
+            android:label="@string/title_activity_application_settings"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".presenter.activity.ApplicationSettingsActivity"

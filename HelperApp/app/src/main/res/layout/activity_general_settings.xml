@@ -5,41 +5,25 @@
     tools:context="com.app.helper.vladburca.helperapp.presenter.activity.GeneralSettingsActivity">
 
     <RelativeLayout
-        android:id="@+id/app_icon_holder"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <ImageView
-            android:id="@+id/app_icon_large"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/remind_me_icon"
-            android:scaleType="centerCrop"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/persistent_holder"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:layout_below="@+id/app_icon_holder">
+        android:paddingBottom="@dimen/activity_vertical_margin">
 
         <TextView
-            android:id="@+id/monitored_text"
+            android:id="@+id/persitent_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/application_settings_monitored_string"
+            android:text="@string/settings_enable_persistent_notification"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="true"
             android:textSize="16dp"/>
 
         <Switch
-            android:id="@+id/switch_monitor"
+            android:id="@+id/switch_persistent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -60,17 +44,36 @@
             android:id="@+id/complex_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/application_settings_ignore_string"
+            android:text="@string/settings_enable_complex_notification"
             android:layout_alignParentLeft="true"
             android:layout_centerHorizontal="true"
             android:textSize="16dp"/>
 
-        <Button
+        <Switch
+            android:id="@+id/switch_complex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/application_settings_ignore_button_text"
-            android:id="@+id/button"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/reset_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_reset_notification_behaviour"
+        android:layout_below="@+id/complex_holder"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/button_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_reset_button_text"
+        android:layout_below="@+id/reset_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.app.helper.vladburca.helperapp.model;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.helper.vladburca.helperapp.R;
+import com.app.helper.vladburca.helperapp.presenter.activity.ApplicationSettingsActivity;
 import com.app.helper.vladburca.helperapp.view.HotFixRecycleView;
 
 /**
@@ -55,7 +57,7 @@ public class PackageInfoRowItem {
     public static class ViewHolder extends HotFixRecycleView.ViewHolder implements View.OnClickListener{
 
         private final String TAG = "PackageInfoRowItem.ViewHolder";
-
+        private static final String appNameKey = "appNameKey";
 
         public PackageInfoRowItem item;
         public Activity activity;
@@ -83,7 +85,9 @@ public class PackageInfoRowItem {
 
         @Override
         public void onClick(View v) {
-            //Doo shit here
+            Intent intent = new Intent(activity, ApplicationSettingsActivity.class);
+            intent.putExtra(appNameKey, item.getName());
+            activity.startActivity(intent);
         }
     }
 }
