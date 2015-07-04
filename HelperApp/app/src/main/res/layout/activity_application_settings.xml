@@ -66,10 +66,10 @@
             android:textSize="16dp"/>
 
         <Button
+            android:id="@+id/ignore_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/application_settings_ignore_button_text"
-            android:id="@+id/button"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>

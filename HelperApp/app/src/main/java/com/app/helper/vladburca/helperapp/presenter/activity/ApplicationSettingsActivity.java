@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -22,6 +24,7 @@ public class ApplicationSettingsActivity extends Activity {
 
     private ImageView appIcon;
     private Switch appMonitor;
+    private Button ignoreApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class ApplicationSettingsActivity extends Activity {
         this.applicationSettingsActivityController = new ApplicationSettingsActivityController(this, appName);
         this.appIcon = (ImageView) findViewById(R.id.app_icon_large);
         this.appMonitor = (Switch) findViewById(R.id.switch_monitor);
+        this.ignoreApp = (Button) findViewById(R.id.ignore_button);
 
         applicationSettingsActivityController.preloadData(appIcon, appMonitor);
 
@@ -43,6 +47,14 @@ public class ApplicationSettingsActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 applicationSettingsActivityController.updateAppMonitorisation(b);
+            }
+        });
+
+        this.ignoreApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                applicationSettingsActivityController.ignoreApplication();
+                finish();
             }
         });
     }

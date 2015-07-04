@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.widget.Switch;
 
+import com.app.helper.vladburca.helperapp.Utils.ApplicationUtils;
 import com.app.helper.vladburca.helperapp.Utils.PreferenceUtils;
 
 /**
@@ -44,6 +45,7 @@ public class SettingsActivityController {
 
     public void resetNotificationsBehaviour(){
         preferenceUtils.setComplexValue(false);
-
+        ApplicationUtils applicationUtils = new ApplicationUtils();
+        applicationUtils.resetApplicationPrefs(preferenceUtils, activity);
     }
 }

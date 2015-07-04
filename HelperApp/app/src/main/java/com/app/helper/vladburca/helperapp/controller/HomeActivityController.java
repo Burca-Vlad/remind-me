@@ -54,13 +54,15 @@ public class HomeActivityController {
             if(resolveInfo.activityInfo.loadLabel(activity.getPackageManager()).toString() != null && resolveInfo.loadIcon(activity.getPackageManager()) != null){
                 Log.i(TAG, resolveInfo.activityInfo.packageName);
                 String appName = resolveInfo.activityInfo.loadLabel(activity.getPackageManager()).toString();
-                PackageInfoRowItem item = new PackageInfoRowItem();
-                item.setIcon(resolveInfo.activityInfo.loadIcon(activity.getPackageManager()));
-                item.setName(appName);
-                Log.i(TAG,"value " + preferenceUtils.isApplicationMontitored(appName));
-                item.setIsMonitored(preferenceUtils.isApplicationMontitored(appName));
-                item.setActivityInfo(resolveInfo.activityInfo);
-                apps.add(item);
+                if(!preferenceUtils.shouldAppBeIgnored(appName)){
+                    PackageInfoRowItem item = new PackageInfoRowItem();
+                    item.setIcon(resolveInfo.activityInfo.loadIcon(activity.getPackageManager()));
+                    item.setName(appName);
+                    Log.i(TAG,"value " + preferenceUtils.isApplicationMonitored(appName));
+                    item.setIsMonitored(preferenceUtils.isApplicationMonitored(appName));
+                    item.setActivityInfo(resolveInfo.activityInfo);
+                    apps.add(item);
+                }
             }
         }
         return apps;

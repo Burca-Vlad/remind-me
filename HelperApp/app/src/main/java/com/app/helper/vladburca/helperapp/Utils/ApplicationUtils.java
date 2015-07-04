@@ -34,4 +34,18 @@ public class ApplicationUtils {
         }
         return null;
     }
+
+    public void resetApplicationPrefs(PreferenceUtils preferenceUtils, Activity activity){
+        final PackageManager pms = activity.getPackageManager();
+        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> userApplications =  pms.queryIntentActivities(intent, PackageManager.GET_META_DATA);
+        for(ResolveInfo resolveInfo : userApplications) {
+            if (resolveInfo.activityInfo.loadLabel(activity.getPackageManager()) != null && resolveInfo.loadIcon(activity.getPackageManager()) != null) {
+                String appName = resolveInfo.activityInfo.loadLabel(activity.getPackageManager()).toString();
+                preferenceUtils.setShouldAppBeIgnored(appName, false);
+                preferenceUtils.setApplicationSelected(appName, true);
+            }
+        }
+    }
 }

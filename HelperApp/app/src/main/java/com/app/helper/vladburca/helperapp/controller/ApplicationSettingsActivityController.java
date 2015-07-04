@@ -43,7 +43,7 @@ public class ApplicationSettingsActivityController {
 
     public void preloadData(ImageView appIcon, Switch appMonitor){
         setAppIcon(appIcon);
-        appMonitor.setChecked(preferenceUtils.isApplicationMontitored(appName));
+        appMonitor.setChecked(preferenceUtils.isApplicationMonitored(appName));
     }
 
     private void setAppIcon(ImageView appIcon){
@@ -52,5 +52,9 @@ public class ApplicationSettingsActivityController {
 
     public void updateAppMonitorisation(boolean isMonitored){
         preferenceUtils.setApplicationSelected(appName, isMonitored);
+    }
+
+    public void ignoreApplication(){
+        preferenceUtils.setShouldAppBeIgnored(appName, true);
     }
 }

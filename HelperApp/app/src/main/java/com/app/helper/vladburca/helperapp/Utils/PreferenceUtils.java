@@ -12,6 +12,7 @@ public class PreferenceUtils {
     //Preference Keys
     private static String persistentKey = "persistentKey";
     private static String complexKey = "complexKey";
+    private static String ignoreSuffix = "ignoreSuffix";
 
     private String prefKey = "com.app.helper.vladburca.helperapp";
     private SharedPreferences sharedPreferences;
@@ -36,11 +37,19 @@ public class PreferenceUtils {
         return sharedPreferences.getBoolean(complexKey, false);
     }
 
-    public boolean isApplicationMontitored(String appName){
+    public boolean isApplicationMonitored(String appName){
         return sharedPreferences.getBoolean(appName, true);
     }
 
     public void setApplicationSelected(String appName, boolean appSelection){
         sharedPreferences.edit().putBoolean(appName, appSelection).commit();
+    }
+
+    public void setShouldAppBeIgnored(String appName, boolean shouldIgnore){
+        sharedPreferences.edit().putBoolean(appName + ignoreSuffix, shouldIgnore).commit();
+    }
+
+    public boolean shouldAppBeIgnored(String appName){
+        return sharedPreferences.getBoolean(appName + ignoreSuffix, false);
     }
 }
