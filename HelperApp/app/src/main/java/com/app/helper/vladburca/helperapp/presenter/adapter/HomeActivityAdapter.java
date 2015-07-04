@@ -1,6 +1,9 @@
 package com.app.helper.vladburca.helperapp.presenter.adapter;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +51,7 @@ public class HomeActivityAdapter extends HotFixRecycleView.Adapter<PackageInfoRo
 
     @Override
     public void onBindViewHolder(PackageInfoRowItem.ViewHolder viewHolder, int i) {
-        PackageInfoRowItem packageInfoRowItem = items.get(i);
+        final PackageInfoRowItem packageInfoRowItem = items.get(i);
         viewHolder.setItem(packageInfoRowItem);
         viewHolder.setContext(activity);
 
@@ -70,10 +73,32 @@ public class HomeActivityAdapter extends HotFixRecycleView.Adapter<PackageInfoRo
             viewHolder.appPriority.setText(activity.getString(R.string.home_activity_app_is_not_monitored));
             viewHolder.appPriority.setTextColor(activity.getResources().getColor(R.color.not_monitored_red));
         }
+
+        if (packageInfoRowItem.getActivityInfo() != null){
+            viewHolder.icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   startActivity(packageInfoRowItem.getActivityInfo());
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    private void startActivity(ActivityInfo activityInfo){
+        ComponentName name=new ComponentName(activityInfo.applicationInfo.packageName,
+                activityInfo.name);
+        Intent i=new Intent(Intent.ACTION_MAIN);
+
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        i.setComponent(name);
+
+        activity.startActivity(i);
     }
 }

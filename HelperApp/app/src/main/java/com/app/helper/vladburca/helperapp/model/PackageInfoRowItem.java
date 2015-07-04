@@ -1,6 +1,7 @@
 package com.app.helper.vladburca.helperapp.model;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ public class PackageInfoRowItem {
     private String name;
     private Drawable icon;;
     private boolean isMonitored;
+    private ActivityInfo activityInfo;
 
     public String getName() {
         return name;
@@ -40,6 +42,14 @@ public class PackageInfoRowItem {
 
     public void setIsMonitored(boolean isMonitored) {
         this.isMonitored = isMonitored;
+    }
+
+    public ActivityInfo getActivityInfo() {
+        return activityInfo;
+    }
+
+    public void setActivityInfo(ActivityInfo activityInfo) {
+        this.activityInfo = activityInfo;
     }
 
     public static class ViewHolder extends HotFixRecycleView.ViewHolder implements View.OnClickListener{

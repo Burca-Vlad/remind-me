@@ -53,11 +53,13 @@ public class HomeActivityController {
         for (ResolveInfo resolveInfo : appsa){
             Log.i(TAG, resolveInfo.toString());
             if(resolveInfo.activityInfo.loadLabel(activity.getPackageManager()).toString() != null && resolveInfo.loadIcon(activity.getPackageManager()) != null){
+                Log.i(TAG, resolveInfo.activityInfo.packageName);
                 String appName = resolveInfo.activityInfo.loadLabel(activity.getPackageManager()).toString();
                 PackageInfoRowItem item = new PackageInfoRowItem();
                 item.setIcon(resolveInfo.activityInfo.loadIcon(activity.getPackageManager()));
                 item.setName(appName);
                 item.setIsMonitored(preferenceUtils.isApplicationMontitored(appName));
+                item.setActivityInfo(resolveInfo.activityInfo);
                 apps.add(item);
             }
         }
