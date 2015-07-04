@@ -16,6 +16,7 @@ public class PackageInfoRowItem {
 
     private String name;
     private Drawable icon;;
+    private boolean isMonitored;
 
     public String getName() {
         return name;
@@ -31,6 +32,14 @@ public class PackageInfoRowItem {
 
     public void setIcon(Drawable icon) {
         this.icon = icon;
+    }
+
+    public boolean isMonitored() {
+        return isMonitored;
+    }
+
+    public void setIsMonitored(boolean isMonitored) {
+        this.isMonitored = isMonitored;
     }
 
     public static class ViewHolder extends HotFixRecycleView.ViewHolder implements View.OnClickListener{

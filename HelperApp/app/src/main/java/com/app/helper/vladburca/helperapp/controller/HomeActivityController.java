@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
 
+import com.app.helper.vladburca.helperapp.Utils.PreferenceUtils;
 import com.app.helper.vladburca.helperapp.model.PackageInfoRowItem;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class HomeActivityController {
 
-    public volatile static HomeActivityController instance;
+    public static HomeActivityController instance;
 
     private Activity activity;
     private ArrayList<PackageInfoRowItem> apps;
@@ -34,11 +35,7 @@ public class HomeActivityController {
     }
 
     public static HomeActivityController getInstance(Activity activity) {
-        if (instance == null) {
-            synchronized (HomeActivityController.class) {
-                instance = new HomeActivityController(activity);
-            }
-        }
+        instance = new HomeActivityController(activity);
         return instance;
     }
 
@@ -51,13 +48,16 @@ public class HomeActivityController {
         final PackageManager pms = activity.getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        PreferenceUtils preferenceUtils = new PreferenceUtils(activity);
         List<ResolveInfo> appsa = pms.queryIntentActivities(intent, PackageManager.GET_META_DATA);
         for (ResolveInfo resolveInfo : appsa){
             Log.i(TAG, resolveInfo.toString());
             if(resolveInfo.activityInfo.loadLabel(activity.getPackageManager()).toString() != null && resolveInfo.loadIcon(activity.getPackageManager()) != null){
+                String appName = resolveInfo.activityInfo.loadLabel(activity.getPackageManager()).toString();
                 PackageInfoRowItem item = new PackageInfoRowItem();
                 item.setIcon(resolveInfo.activityInfo.loadIcon(activity.getPackageManager()));
-                item.setName(resolveInfo.activityInfo.loadLabel(activity.getPackageManager()).toString());
+                item.setName(appName);
+                item.setIsMonitored(preferenceUtils.isApplicationMontitored(appName));
                 apps.add(item);
             }
         }

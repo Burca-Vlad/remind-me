@@ -63,8 +63,13 @@ public class HomeActivityAdapter extends HotFixRecycleView.Adapter<PackageInfoRo
         }else{
             viewHolder.appName.setText(activity.getString(R.string.home_activity_app_name_placeholder));
         }
-
-        viewHolder.appPriority.setText(activity.getString(R.string.home_activity_app_priority_placeholder));
+        if(packageInfoRowItem.isMonitored()){
+            viewHolder.appPriority.setText(activity.getString(R.string.home_activity_app_is_monitored));
+            viewHolder.appPriority.setTextColor(activity.getResources().getColor(R.color.monitored_green));
+        }else{
+            viewHolder.appPriority.setText(activity.getString(R.string.home_activity_app_is_not_monitored));
+            viewHolder.appPriority.setTextColor(activity.getResources().getColor(R.color.not_monitored_red));
+        }
     }
 
     @Override

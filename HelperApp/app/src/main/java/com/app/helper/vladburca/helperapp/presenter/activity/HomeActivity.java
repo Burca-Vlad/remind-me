@@ -1,6 +1,7 @@
 package com.app.helper.vladburca.helperapp.presenter.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
@@ -35,6 +36,7 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        getActionBar().setIcon(R.drawable.remind_me_icon);
         this.appList = (HotFixRecycleView) findViewById(R.id.app_list);
         this.appsSearch = (EditText) findViewById(R.id.app_search);
 
@@ -90,6 +92,8 @@ public class HomeActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, ApplicationSettingsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
